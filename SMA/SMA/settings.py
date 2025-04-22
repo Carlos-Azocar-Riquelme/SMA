@@ -34,8 +34,11 @@ SECRET_KEY = 'django-insecure-)6-t0a-)%#nma9421++zy!38+%$2e&%l%#epg+&_hc487ij6i%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS =  ['sma-mjiy.onrender.com', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = [
+    os.environ.get("PRODUCTION_HOST"),
+    "localhost",
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -94,6 +97,10 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
+        "OPTIONS": {
+            "sslmode": "require",
+        },
+        "DISABLE_SERVER_SIDE_CURSORS": True,
     }
     
 }
